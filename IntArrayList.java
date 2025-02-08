@@ -1,5 +1,3 @@
-package Lists;
-
 public class IntArrayList {
     private static final int DEFAULT_INITIAL_CAPACITY = 8;
 
