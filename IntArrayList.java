@@ -50,6 +50,10 @@ public class IntArrayList {
     }
 
     public int insert(int element, int position) {
+        if (position < 0 || position >= size) {
+            throw new IndexOutOfBoundsException(position);
+        }
+        
         // TODO: write codes for this method
         // move elements from nums[position] till end to the right
         // insert the element 
