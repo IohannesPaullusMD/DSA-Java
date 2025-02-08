@@ -56,6 +56,15 @@ public class IntArrayList {
         return element;
     }
 
+    public int replace(int position, int element) {
+        if (position < 0 || position >= size) {
+            throw new IndexOutOfBoundsException(position);
+        }
+
+        // TODO: write codes for this method
+        return element;
+    }
+
     public int remove(int position) {
         if (position < 0 || position >= size) {
             throw new IndexOutOfBoundsException(position);
