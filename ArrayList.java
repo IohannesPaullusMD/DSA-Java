@@ -1,18 +1,16 @@
-public class IntArrayList {
+
+@SuppressWarnings("unchecked")
+public class ArrayList<T> {
     private static final int DEFAULT_INITIAL_CAPACITY = 8;
 
-    private int[] nums;
+    private T[] arr;
     private int size;
 
-    // constructor 1
-    public IntArrayList()
-    {
-        // the next line will simply call constructor 2 with the given argument
+    public ArrayList() {
         this(DEFAULT_INITIAL_CAPACITY);
     }
 
-    // constructor 2
-    public IntArrayList(int inititalCapacity) {
+    public ArrayList(int inititalCapacity) {
         if (inititalCapacity != DEFAULT_INITIAL_CAPACITY) {
             // make the initial capacity be a power 2
             int x = 1;
@@ -22,64 +20,66 @@ public class IntArrayList {
             inititalCapacity = x;
         }
 
-        nums = new int[inititalCapacity];
+        arr = (T[]) new Object[inititalCapacity];
         size = 0;
     }
 
     private void resize() {
-        int[] newNums = new int[size << 1];
-        System.arraycopy(nums, 0, newNums, 0, size);
-        nums = newNums;
+        T[] newArr = (T[]) new Object[size << 1];
+        System.arraycopy(arr, 0, newArr, 0, size);
+        arr = newArr;
     }
 
     public int size() {
         return size;
     }
 
-    public int add(int element) {
-        return insert(element, size);
+    public T add(T element) {
+        return insert(element, size); 
     }
 
-    public int insert(int element, int position) {
+    public T insert(T element, int position) {
         if (position < 0 || position > size) {
             throw new IndexOutOfBoundsException(position);
         }
 
-        if (size == nums.length) {
+        if (size == arr.length) {
             resize();
         }
 
         for (int i = size; i > position; --i) {
-            nums[i] = nums[i-1];
+            arr[i] = arr[i-1];
         }
 
-        return nums[size++] = element;
+        return arr[size++] = element;
     }
 
-    public int get(int position) {
+    public T get(int position) {
         if (position < 0 || position >= size) {
             throw new IndexOutOfBoundsException(position);
         }
-        return nums[position];
+
+        return arr[position];
     }
 
-    public int replace(int element, int position) {
+    public T replace(T element, int position) {
         if (position < 0 || position >= size) {
             throw new IndexOutOfBoundsException(position);
         }
-        return nums[position] = element;
+
+        return arr[position] = element;
     }
 
-    public int remove(int position) {
+    public T remove(int position) {
         if (position < 0 || position >= size) {
             throw new IndexOutOfBoundsException(position);
         }
         
-        int x = nums[position];
+        T x = arr[position];
         --size;
         
         for (int i = position + 1; i < size; ++i) {
-            nums[i-1] = nums[i];
+            arr[i-1] = arr[i];
         }
 
         return x;
