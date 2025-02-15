@@ -51,7 +51,9 @@ public class ArrayList<T> {
             arr[i] = arr[i-1];
         }
 
-        return arr[size++] = element;
+        ++size;
+
+        return arr[position] = element;
     }
 
     public T get(int position) {
