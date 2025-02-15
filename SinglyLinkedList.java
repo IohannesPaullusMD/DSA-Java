@@ -119,7 +119,7 @@ public class SinglyLinkedList<T> {
             throw new NoSuchElementException();
         }
 
-        Node<T> nodeToRemove = null;
+        Node<T> nodeToRemove = firstNode;
 
         if (size == 1) {
             firstNode = lastNode = null;
