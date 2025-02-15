@@ -28,20 +28,34 @@ public class IntArrayList {
         size = 0;
     }
 
-    public int add(int element) {
-        if (size == nums.length) {
-            int[] newNums = new int[size << 1];
-            System.arraycopy(nums, 0, newNums, 0, size);
-            nums = newNums;
-        }
-        
-        nums[size++] = element;
-
-        return element;
+    private void resize() {
+        int[] newNums = new int[size << 1];
+        System.arraycopy(nums, 0, newNums, 0, size);
+        nums = newNums;
     }
 
     public int size() {
         return size;
+    }
+
+    public int add(int element) {
+        return insert(element, size);
+    }
+
+    public int insert(int element, int position) {
+        if (position < 0 || position > size) {
+            throw new IndexOutOfBoundsException(position);
+        }
+
+        if (size == nums.length) {
+            resize();
+        }
+
+        for (int i = size; i > position; --i) {
+            nums[i] = nums[i-1];
+        }
+
+        return nums[size++] = element;
     }
 
     public int get(int position) {
@@ -51,19 +65,25 @@ public class IntArrayList {
         return nums[position];
     }
 
-    public int insert(int element, int position) {
-        // TODO: write codes for this method
-        // move elements from nums[position] till end to the right
-        // insert the element 
-        return element;
+    public int replace(int element, int position) {
+        if (position < 0 || position > size) {
+            throw new IndexOutOfBoundsException(position);
+        }
+        return nums[position] = element;
     }
 
     public int remove(int position) {
-        if (position < 0 || position >= size) {
+        if (position < 0 || position > size) {
             throw new IndexOutOfBoundsException(position);
         }
+        
+        int x = nums[position];
+        --size;
+        
+        for (int i = position + 1; i < size; ++i) {
+            nums[i-1] = nums[i];
+        }
 
-        // TODO: write codes for this method
-        return nums[position];
+        return x;
     }
 }
